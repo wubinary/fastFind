@@ -1,0 +1,39 @@
+// ============================================================================================== //
+// USAGE TXT
+// ============================================================================================== //
+
+#define USAGE_TXT usageTxt;
+
+static const char* usageTxt = R"""(
+NAME
+    ff - fast file name pattern matching.
+
+USAGE
+    ff <Pattern> <Root>
+
+OPTIONS
+    -p, --pattern, $0
+        File pattern that you are searching for.
+
+    -r, --root, $1
+        Root directory that file matching searched.
+
+    -V, --version
+        Display version information and exit.  No other output is generated.
+
+    -h, --help
+        Display help text and exit. No other output generated.
+
+)""";
+
+
+// ============================================================================================== //
+// VERSION TXT
+// ============================================================================================== //
+
+#define VERSION_TXT versionTxt;
+
+static const char* versionTxt = R"""(
+Version:${PROJECT_VERSION}
+)""";
+

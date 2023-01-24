@@ -1,0 +1,53 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Vim swaps
+*.swp
+
+# Ctags
+tags
+
+# Build results
+CMakeCache.txt
+.cache/
+CMakeFiles/
+out/build
+[Bb][Uu][Ii][Ll][Dd]/
+
+# Configure file
+src/optUsage.def
+
+# Out files
+compile_commands.json
+ff
+
