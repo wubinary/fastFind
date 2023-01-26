@@ -6,7 +6,7 @@ fastFind (ff) is fast pattern matching operation for linux.
 ```cmd
 # build ff
 > git clone https://github.com/wubinary/fastFind.git && cd fastFind
-> ./build.sh
+> ./build.sh Release
 
 # test ff
 > ./run.sh
