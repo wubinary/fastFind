@@ -35,4 +35,4 @@ OPTIONS
 ```
 
 # Demo
-![](https://i.imgur.com/sVxb2oA.gif)
+<img src="https://i.imgur.com/sVxb2oA.gif" width="1200px">
