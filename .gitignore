@@ -45,7 +45,7 @@ out/build
 [Bb][Uu][Ii][Ll][Dd]/
 
 # Configure file
-src/optUsage.def
+src/include/config/optUsage.def
 
 # Out files
 compile_commands.json

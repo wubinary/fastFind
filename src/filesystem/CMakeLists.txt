@@ -1,0 +1,5 @@
+
+list(APPEND SRC_FILES
+     ${CMAKE_CURRENT_SOURCE_DIR}/navigator.cpp)
+
+set(SRC_FILES ${SRC_FILES} PARENT_SCOPE)

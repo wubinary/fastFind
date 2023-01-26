@@ -9,7 +9,7 @@ NAME
     ff - fast file name pattern matching.
 
 USAGE
-    ff <Pattern> <Root>
+    ff <Pattern> <RootPath>
 
 OPTIONS
     -p, --pattern, $0
@@ -18,12 +18,11 @@ OPTIONS
     -r, --root, $1
         Root directory that file matching searched.
 
-    -V, --version
+    -v, --version
         Display version information and exit.  No other output is generated.
 
     -h, --help
         Display help text and exit. No other output generated.
-
 )""";
 
 

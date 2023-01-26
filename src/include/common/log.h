@@ -1,5 +1,7 @@
 #pragma once
 
+#include "common/color.hpp"
+
 #include <iostream>
 
 __BEGIN_DECLS
@@ -53,5 +55,10 @@ static bool ShouldLog(Severity severity) {
 #endif
 #endif
 
+
+#ifndef SHOW
+#define SHOW() \
+    std::cout
+#endif
 
 __END_DECLS

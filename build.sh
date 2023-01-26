@@ -12,7 +12,7 @@ function usage_error() {
 }
 
 # build dir
-BUILD_DIR=out/build/
+BUILD_DIR=out/build
 
 # build type (Debug/Release)
 BUILD_TYPE=$1
