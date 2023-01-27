@@ -1,7 +1,4 @@
-#include <threadpool/threadpool.h>
-
-
-#include <iostream>
+#include "threadpool/threadpool.h"
 
 namespace threadpool {
 

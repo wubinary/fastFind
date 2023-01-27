@@ -1,15 +1,12 @@
-#include "common/log.h"
 #include "common/utils.h"
 #include "config/config.h"
 #include "filesystem/navigator.h"
-
-#include <iostream>
 
 int main(int argc, char *argv[]) {
     using Config = config::Config;
     using Navigator = filesystem::Navigator;
 
-    { SCOPED_TIMER()
+    { SCOPED_TIMER();
 
     // CreateConfig
     auto cfg = Config::CreateConfig(argc, argv);
