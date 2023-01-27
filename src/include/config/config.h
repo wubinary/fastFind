@@ -38,6 +38,11 @@ struct Config {
         std::string pattern;
         std::string rootPath;
 
+        if (argc < 2) {
+            LOG(INFO) << USAGE_TXT;
+            exit(EXIT_SUCCESS);
+        }
+
         // Case-(1), Option arguments, Ex: ff -h -v
         int c;
         while ((c = getopt_long(argc, argv, optsStr, optsLong, NULL)) != -1) {
