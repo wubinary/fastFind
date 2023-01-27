@@ -1,4 +1,5 @@
 #include "common/log.h"
+#include "common/utils.h"
 #include "config/config.h"
 #include "filesystem/navigator.h"
 
@@ -7,6 +8,8 @@
 int main(int argc, char *argv[]) {
     using Config = config::Config;
     using Navigator = filesystem::Navigator;
+
+    { SCOPED_TIMER()
 
     // CreateConfig
     auto cfg = Config::CreateConfig(argc, argv);
@@ -17,9 +20,7 @@ int main(int argc, char *argv[]) {
     // Start DFS search
     navigator->Search();
 
-    std::cout << " Pattern:" << cfg.pattern
-              << " RootPath:" << cfg.rootPath
-              << std::endl;
+    } SCOPED_TIMER_SUMMARY();
 
     return 0;
 }
