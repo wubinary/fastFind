@@ -1,15 +1,12 @@
 # FastFind (ff)
 
-fastFind (ff) is a fast file pattern matching executer for linux.
+FastFind (ff) is a fast file pattern matching executer for linux.
 
 # Install
 ```cmd
-# build ff
+# build ff && unitest ff
 > git clone https://github.com/wubinary/fastFind.git && cd fastFind
-> ./build.sh Release
-
-# unittest ff
-> ./run.sh
+> ./build.sh Release && ./run.sh
 
 # run ff
 > export PATH=~/.local/bin/:$PATH
