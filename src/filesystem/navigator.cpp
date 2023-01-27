@@ -8,6 +8,23 @@ namespace filesystem {
 namespace fs = std::filesystem;
 
 void Navigator::Search() {
+    const auto IsDirectory = [&](const auto& rootPath) {
+        try {
+            if (fs::is_directory(rootPath)) {
+                return true;
+            }
+        } catch (fs::filesystem_error& e) {
+            LOG(WARN) << "SKIPPED (filesystem_error) : " << rootPath << std::endl;
+        }
+        return false;
+    };
+
+    // ****************************************************************************************** //
+    if (UNLIKELY(!IsDirectory(cfg.rootPath))) {
+        LOG(WARN) << "given path is not a directory : " << cfg.rootPath << std::endl;
+        return;
+    }
+
     // Init thread pool
     ThreadPool::Start();
 
@@ -44,7 +61,7 @@ void Navigator::SearchFolder(const Path& pathStr) {
 
     const auto IsDirectory = [&](const auto& path) {
         try {
-            if (fs::exists(path) && fs::is_directory(path)) {
+            if (fs::is_directory(path)) {
                 return true;
             }
         } catch (fs::filesystem_error& e) {
@@ -54,38 +71,27 @@ void Navigator::SearchFolder(const Path& pathStr) {
     };
 
     const auto IsMatchSearchPattern = [&](const auto& entryStr, const auto& pattern,
-            bool isRegex, int& left, int& right) {
-        // match pattern = entry[left, right]
-        bool match = false;
+            bool isRegex, auto& left, auto& right) {
+        // match pattern = entry.substr[left, right]
         if (isRegex) {
-            match = true;
+            return true;
         } else {
             auto pos = entryStr.find(pattern);
-            match = (pos != std::string::npos);
             left  = pos;
             right = pos + pattern.size() - 1;
+            return (pos != std::string::npos);
         }
-        return match;
     };
 
-    // ***************************************  Main  ******************************************* //
+    // ****************************************************************************************** //
     int left, right;
 
     fs::path folder(pathStr);
-    if (!IsDirectory(folder)) {
-        LOG(WARN) << "given path is not a directory : " << folder.string() << std::endl;
-        return;
-    }
 
     std::vector<PathMatch> matches;
     for (const auto& entry : fs::directory_iterator(folder,
-                fs::directory_options::skip_permission_denied)) {
+            fs::directory_options::skip_permission_denied)) {
         const auto& entryStr = entry.path().string();
-
-        // Check permission
-        if (!IsAccessable(entry.path())) {
-            continue;
-        }
 
         // If directory then enque a new search job.
         if (IsDirectory(entry.path())) {
@@ -94,7 +100,7 @@ void Navigator::SearchFolder(const Path& pathStr) {
 
         // Append matched entry to matches.
         if (IsMatchSearchPattern(entryStr, cfg.pattern, cfg.isRegex, left, right)) {
-            matches.push_back({entryStr, left, right});
+            matches.emplace_back(entryStr, left, right);
         }
     }
 
@@ -117,7 +123,7 @@ void Navigator::ShowResult() {
     }
 
     for (const auto&[path, left, right] : showResults) {
-        const auto& colorized = color::rize(path.substr(left, right-left+1),
+        const auto colorized = color::rize(path.substr(left, right-left+1),
                                             "Black", "Light Yellow", "Default");
 
         std::string_view sv(path);

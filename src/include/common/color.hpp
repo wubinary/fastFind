@@ -29,7 +29,7 @@ _Pragma( "clang diagnostic pop" )
 #define RESTORE_WARNINGS
 #endif
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
 SUPPRESS_WARNINGS
@@ -37,7 +37,7 @@ SUPPRESS_WARNINGS
 namespace color
 {
 
-    const static std::map<std::string, std::string> color_foreground =
+    const static std::unordered_map<std::string, std::string> color_foreground =
     {
         { "Default", "39" },
         { "Black", "30" },
@@ -58,7 +58,7 @@ namespace color
         { "White", "97" }
     };
 
-    const static std::map<std::string, std::string> color_background =
+    const static std::unordered_map<std::string, std::string> color_background =
     {
         { "Default", "49" },
         { "Black", "40" },
@@ -80,7 +80,7 @@ namespace color
     };
 
 
-    const static std::map<std::string, std::string> formatting_set =
+    const static std::unordered_map<std::string, std::string> formatting_set =
     {
         { "Default", "0" },
         { "Bold", "1" },
@@ -91,7 +91,7 @@ namespace color
         { "Hidden", "8" }
     };
 
-    const static std::map<std::string, std::string> formatting_reset =
+    const static std::unordered_map<std::string, std::string> formatting_reset =
     {
         { "All", "0" },
         { "Bold", "21" },
@@ -135,7 +135,7 @@ namespace color
                             source +
                             control + std::string{"["} +
                             formatting_reset.at( reset_formatting ) + std::string{"m"};
-        return ans;
+        return std::move(ans);
     }
 
 }//namespace color

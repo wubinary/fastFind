@@ -42,18 +42,6 @@ private:
 
     void ShowResult();
 
-    void InsertFolders(const PathVec& newFolders);
-
-    void InsertResults(const PathVec& newResults);
-
-    const PathVec& GetFolders();
-
-    const PathVec& GetFolders(int nums);
-
-    const PathVec& GetResults();
-
-    const PathVec& GetResults(int nums);
-
 private:
     const Config cfg;
 
@@ -64,9 +52,9 @@ private:
     std::condition_variable var##_mutex_condition;
 #endif
 
-    DEQUE_MUTEX_CONDVAR(PathMatch, results);
+    DEQUE_MUTEX_CONDVAR(PathMatch, results);  // Que for saving results, and prevent race condition.
 
-    std::mutex show_mutex;  // Prevent cout results out-of-order.
+    std::mutex show_mutex;  // Prevent stdout results into out-of-order.
 };
 
 
