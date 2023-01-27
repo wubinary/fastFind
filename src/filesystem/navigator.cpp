@@ -110,8 +110,6 @@ void Navigator::SearchFolder(const Path& pathStr) {
 }
 
 void Navigator::ShowResult() {
-    std::unique_lock<std::mutex> showLock(show_mutex);
-
     std::vector<PathMatch> showResults;
     {
         std::unique_lock<std::mutex> lock(results_mutex);
@@ -122,17 +120,20 @@ void Navigator::ShowResult() {
         }
     }
 
-    for (const auto&[path, left, right] : showResults) {
-        const auto colorized = color::rize(path.substr(left, right-left+1),
-                                            "Black", "Light Yellow", "Default");
+    {
+        std::unique_lock<std::mutex> showLock(show_mutex);
+        for (const auto&[path, left, right] : showResults) {
+            const auto colorized = color::rize(path.substr(left, right-left+1),
+                    "Black", "Light Yellow", "Default");
 
-        std::string_view sv(path);
-        std::string_view prefix(sv.substr(0, std::max(0, left)));
-        std::string_view postfix(sv.substr(right+1, std::max(0, (int)path.size() - right - 1)));
+            std::string_view sv(path);
+            std::string_view prefix(sv.substr(0, std::max(0, left)));
+            std::string_view postfix(sv.substr(right+1, std::max(0, (int)path.size() - right - 1)));
 
-        SHOW() << "- " << prefix << colorized << postfix << std::endl;
+            SHOW() << "- " << prefix << colorized << postfix << std::endl;
+        }
+        SHOW() << std::flush;
     }
-    SHOW() << std::flush;
 }
 
 }  // namespace filesystem
