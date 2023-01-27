@@ -8,8 +8,12 @@ fastFind (ff) is fast pattern matching operation for linux.
 > git clone https://github.com/wubinary/fastFind.git && cd fastFind
 > ./build.sh Release
 
-# test ff
+# unittest ff
 > ./run.sh
+
+# run ff
+> export PATH=~/.local/bin/:$PATH
+> ff <Pattern> <RootPath>
 ```
 
 # Usage

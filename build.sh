@@ -11,6 +11,9 @@ function usage_error() {
     exit 1
 }
 
+# binary dir
+BINARY_DIR=~/.local/bin
+
 # build dir
 BUILD_DIR=out/build
 
@@ -28,6 +31,7 @@ fi
 # ================================================================================================ #
 rm -rf ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}
+mkdir -p ${BINARY_DIR}
 
 
 # ================================================================================================ #
@@ -37,7 +41,8 @@ cmake -S ./ -B ${BUILD_DIR} \
       -DBUILD_TYPE=${BUILD_TYPE} \
       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
+(cd ${BUILD_DIR}; make)
+
 ln -sf ${BUILD_DIR}/compile_commands.json compile_commands.json
 ln -sf ${BUILD_DIR}/src/main_exec ff
-
-cd ${BUILD_DIR}; make
+rsync -L ff ${BINARY_DIR}/ff
