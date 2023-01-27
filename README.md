@@ -36,4 +36,8 @@ OPTIONS
 ```
 
 # Demo
-<img src="ff_demo.gif?raw=true" width="1200px">
+> ff usage
+<img src="docs/ff_demo.gif?raw=true" width="1200px">
+
+> find ~ -name "\*mai\*" V.S. ff mai ~
+<img src="docs/compare_demo.gif?raw=true" width="1200px">
