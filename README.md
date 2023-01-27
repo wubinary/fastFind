@@ -1,6 +1,6 @@
 # FastFind (ff)
 
-fastFind (ff) is fast pattern matching operation for linux.
+fastFind (ff) is a fast file pattern matching executer for linux.
 
 # Install
 ```cmd
